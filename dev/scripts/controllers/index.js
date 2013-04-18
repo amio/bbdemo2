@@ -7,7 +7,7 @@ define(['$', '_', 'B','BC', 'views/index'], function ($, _, B, BaseController, I
   var IndexController = BaseController.extend({
     initialize: function(args){
       console.log('IndexController Initialized.');
-      new IndexView(this.parseArgs(args));
+      new IndexView(args);
     }
   });
   return IndexController;

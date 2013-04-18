@@ -6,7 +6,7 @@ define(['$', '_', 'B'], function ($, _, B){
   var AppRouter = B.Router.extend({
     routes: {
       '': 'index',
-      '*path': 'index'
+      'hotel/:id': 'hotel'
     },
     initialize: function (){
       this.bindRoutes();
