@@ -1,4 +1,5 @@
 require.config({
+  baseUrl: 'app',
   shim: {
     $: {
       exports: 'jQuery'
@@ -15,10 +16,10 @@ require.config({
     }
   },
   paths: {
-    '$': 'libs/jquery',
-    '_': 'libs/underscore',
-    'B': 'libs/backbone',
-    'text': 'libs/require.text',
+    '$': '../libs/jquery',
+    '_': '../libs/underscore',
+    'B': '../libs/backbone',
+    'text': '../libs/require.text',
     // base components
     'BC': 'controllers/base-controller',
     'BV': 'views/base-view'
