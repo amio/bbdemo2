@@ -3,6 +3,8 @@
  * Date: 4/17/13
  */
 define(['$', '_', 'B'], function ($, _, B){
+  'use strict';
+
   var AppRouter = B.Router.extend({
     routes: {
       '': 'index',
@@ -17,14 +19,14 @@ define(['$', '_', 'B'], function ($, _, B){
       // transfer to controllers
       _.each(this.routes, function (name, path){
         this.route(path, name, function (){
-          var args = this.parseRouteArgs(path,arguments);
+          var args = this.parseRouteArgs(path, arguments);
           require(['controllers/' + name], function (Controller){
             new Controller(args);
           });
         });
       }, this);
     },
-    parseRouteArgs: function (path,segments){
+    parseRouteArgs: function (path, segments){
       //
       var args = {};
       return segments;
