@@ -11,6 +11,8 @@ define(['$', '_', 'B', 'BV', 'text!templates/hotel.html'], function ($, _, B, Ba
     },
     render: function (renderArgs){
       this.$el.html(_.template(hotelTmpl)(renderArgs));
+
+      // Render to page wrapper
       this.renderPage();
       return this;
     }

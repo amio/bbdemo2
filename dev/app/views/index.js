@@ -11,6 +11,8 @@ define(['$', '_', 'B', 'BV', 'text!templates/index.html'], function ($, _, B, Ba
     },
     render: function (renderArgs){
       this.$el.html(_.template(indexTmpl)(renderArgs));
+
+      // render to page wrapper
       this.renderPage();
       return this;
     }

@@ -19,7 +19,6 @@ define(['$', '_', 'B'], function ($, _, B){
       }
       router.currentPageView = this;
 
-
     },
 
     supportAnimation: function (){
