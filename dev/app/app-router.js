@@ -21,12 +21,21 @@ define(['$', '_', 'B'], function ($, _, B){
      */
 
     bindRoutes: function (){
-      // transfer to controllers
       _.each(this.routes, function (name, path){
         this.route(path, name, function (){
+          if(this.isBack()){
+            this.doBack();
+            return;
+          }
+
+          // make page views for path
           var args = this.parseRouteArgs(path, arguments);
           require(['views/' + name], function (View){
-            new View(args);
+            var newPageView = new View(args);
+            window.appRouter.historyPages.push({
+              hash: B.history.fragment,
+              view: newPageView
+            });
           });
         });
       }, this);
@@ -42,12 +51,30 @@ define(['$', '_', 'B'], function ($, _, B){
      */
 
     historyPages: [],
-    getCurrentPage: function(){
-      return _.last(this.historyPages);
+    getCurrentPageView: function(){
+      return this.historyPages.length ? _.last(this.historyPages).view : undefined;
     },
     isBack: function(){
-      var len = this.historyPages.length;
-      return len && _.last(this.historyPages).hash == B.history.fragment;
+      var history = this.historyPages;
+      for(var i = history.length; i--;){
+        if(history[i].hash == B.history.fragment){
+          return true;
+        }
+      }
+      return false;
+    },
+    doBack: function(){
+      var history  = window.appRouter.historyPages,
+          fromPage = history.pop(),
+          toPage   = _.last(history);
+      while(toPage.hash !== B.history.fragment){
+        history.pop();
+        toPage = _.last(history);
+      }
+      toPage.view.renderPage({
+        isBack: true,
+        from: fromPage.view
+      });
     }
 
   });

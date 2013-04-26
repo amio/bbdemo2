@@ -4,20 +4,24 @@ define(['$', '_', 'B'], function ($, _, B){
   var BaseView = B.View.extend({
     tagName: 'div',
 
-    renderPage: function (){
+    renderPage: function (opt){
 
-      var router = window.appRouter;
-      this.$el.addClass('page').appendTo('#wrapper');
-      this.$el.position();
+      var router   = window.appRouter,
+          isBack   = opt && opt.isBack,
+          fromView = isBack ? opt.from : router.getCurrentPageView(),
+          toView   = this,
+          animName = isBack ? 'slideright' : 'slideleft';
 
-      if (this.supportAnimation() && router.currentPageView) {
-        this.doSlide(router.currentPageView, this, 'slideleft', function (fromView, toView){
+      toView.$el.addClass('page').appendTo('#wrapper');
+      toView.$el.position();
+
+      if (this.supportAnimation() && fromView) {
+        toView.doSlide(fromView, toView, animName, function (fromView, toView){
           fromView.remove();
         });
       } else {
-        router.currentPageView && router.currentPageView.remove();
+        fromView && fromView.remove();
       }
-      router.currentPageView = this;
 
     },
 
@@ -37,6 +41,7 @@ define(['$', '_', 'B'], function ($, _, B){
           toEl = toPageView.$el;
 
       fromEl.on('webkitAnimationEnd', function (){
+        fromEl.removeClass(animationName + ' out');
         toEl.removeClass(animationName + ' in');
         callback(fromPageView, toPageView);
       });
