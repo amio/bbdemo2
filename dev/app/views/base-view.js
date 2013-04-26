@@ -5,6 +5,7 @@ define(['$', '_', 'B'], function ($, _, B){
     tagName: 'div',
 
     renderPage: function (opt){
+      // todo: render page frame first, then load page content.
 
       var router   = window.appRouter,
           isBack   = opt && opt.isBack,
