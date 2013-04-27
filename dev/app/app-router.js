@@ -41,13 +41,18 @@ define(['$', '_', 'B'], function ($, _, B){
       }, this);
     },
     parseRouteArgs: function (path, segments){
-      // todo: parse path & segments to args
-      var args = {};
-      return segments;
+      var keys = path.match(/:\w+/g),
+          args = {};
+
+      _.each(keys,function(key, index){
+        args[key.substring(1)] = segments[index];
+      });
+
+      return args;
     },
 
     /**
-     * HISTORY & CACHE
+     * HISTORY LOG & PAGE CACHE
      */
 
     historyPages: [],
