@@ -63,10 +63,6 @@ define(['$', '_', 'B'], function ($, _, B){
     isBack: function (){
       var history = this.historyPages;
 
-      if(history.length && B.history.fragment === ''){
-        return true;
-      }
-
       for (var i = history.length; i--;) {
         if (history[i].hash == B.history.fragment) {
           return true;
