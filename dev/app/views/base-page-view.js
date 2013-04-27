@@ -7,10 +7,10 @@ define(['$', '_', 'B'], function ($, _, B){
     renderPage: function (opt){
       // todo: render page frame first, then load page content.
 
-      var router   = window.appRouter,
-          isBack   = opt && opt.isBack,
+      var router = window.appRouter,
+          isBack = opt && opt.isBack,
           fromView = isBack ? opt.from : router.getCurrentPageView(),
-          toView   = this,
+          toView = this,
           animName = isBack ? 'slideright' : 'slideleft';
 
       toView.$el.addClass('page').appendTo('#wrapper');

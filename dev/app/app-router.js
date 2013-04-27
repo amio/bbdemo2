@@ -23,7 +23,7 @@ define(['$', '_', 'B'], function ($, _, B){
     bindRoutes: function (){
       _.each(this.routes, function (name, path){
         this.route(path, name, function (){
-          if(this.isBack()){
+          if (this.isBack()) {
             this.doBack();
             return;
           }
@@ -51,23 +51,28 @@ define(['$', '_', 'B'], function ($, _, B){
      */
 
     historyPages: [],
-    getCurrentPageView: function(){
+    getCurrentPageView: function (){
       return this.historyPages.length ? _.last(this.historyPages).view : undefined;
     },
-    isBack: function(){
+    isBack: function (){
       var history = this.historyPages;
-      for(var i = history.length; i--;){
-        if(history[i].hash == B.history.fragment){
+
+      if(history.length && B.history.fragment === ''){
+        return true;
+      }
+
+      for (var i = history.length; i--;) {
+        if (history[i].hash == B.history.fragment) {
           return true;
         }
       }
       return false;
     },
-    doBack: function(){
-      var history  = window.appRouter.historyPages,
+    doBack: function (){
+      var history = window.appRouter.historyPages,
           fromPage = history.pop(),
-          toPage   = _.last(history);
-      while(toPage.hash !== B.history.fragment){
+          toPage = _.last(history);
+      while (toPage.hash !== B.history.fragment) {
         history.pop();
         toPage = _.last(history);
       }

@@ -1,10 +1,10 @@
 /**
  * Hotel View
  */
-define(['$', '_', 'B', 'BV', 'text!templates/hotel.html'], function ($, _, B, BaseView, hotelTmpl){
+define(['$', '_', 'B', 'BPV', 'text!templates/hotel.html'], function ($, _, B, BasePageView, hotelTmpl){
   'use strict';
 
-  var IndexView = BaseView.extend({
+  var IndexView = BasePageView.extend({
     className: 'hotel-view',
     initialize: function (args){
       this.render(args);

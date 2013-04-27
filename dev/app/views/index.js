@@ -1,10 +1,10 @@
 /**
  * Index View
  */
-define(['$', '_', 'B', 'BV', 'text!templates/index.html'], function ($, _, B, BaseView, indexTmpl){
+define(['$', '_', 'B', 'BPV', 'text!templates/index.html'], function ($, _, B, BasePageView, indexTmpl){
   'use strict';
 
-  var IndexView = BaseView.extend({
+  var IndexView = BasePageView.extend({
     className: 'index-view',
     initialize: function (args){
       this.render(args);

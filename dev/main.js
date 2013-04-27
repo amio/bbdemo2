@@ -22,7 +22,7 @@ require.config({
     'text': '../libs/require.text',
     // base components
     'BC': 'controllers/base-controller',
-    'BV': 'views/base-view'
+    'BPV': 'views/base-page-view'
   }
 });
 
