@@ -8,6 +8,7 @@ define(['$', '_', 'B'], function ($, _, B){
   var AppRouter = B.Router.extend({
     routes: {
       '': 'index',
+      'hotels/:city/:date': 'hotel-list',
       'hotel/:id': 'hotel'
     },
     initialize: function (){
