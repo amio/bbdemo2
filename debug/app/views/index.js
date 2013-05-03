@@ -18,7 +18,8 @@ define(['$', '_', 'B', 'BPV', 'text!templates/index.html'], function ($, _, B, B
     },
 
     events: {
-      'click': 'viewclick'
+      'click': 'viewclick',
+      'scroll': 'viewclick'
     },
     viewclick: function(){
       console.log('index view clicked.');

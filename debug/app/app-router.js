@@ -24,13 +24,14 @@ define(['$', '_', 'B'], function ($, _, B){
     bindRoutes: function (){
       _.each(this.routes, function (name, path){
         this.route(path, name, function (){
+          var args = this.parseRouteArgs(path, arguments);
+
           if (this.isBack()) {
-            this.doBack();
+            this.doBack(args);
             return;
           }
 
           // make page views for path
-          var args = this.parseRouteArgs(path, arguments);
           require(['views/' + name], function (View){
             var newPageView = new View(args);
             window.appRouter.historyPages.push({
@@ -70,10 +71,11 @@ define(['$', '_', 'B'], function ($, _, B){
       }
       return false;
     },
-    doBack: function (){
+    doBack: function (args){
       var history = window.appRouter.historyPages,
           fromPage = history.pop(),
           toPage = _.last(history);
+
       while (toPage.hash !== B.history.fragment) {
         history.pop();
         toPage = _.last(history);
