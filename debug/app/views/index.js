@@ -22,7 +22,8 @@ define(['$', '_', 'B', 'BPV', 'text!templates/index.html'], function ($, _, B, B
       'scroll': 'viewclick'
     },
     viewclick: function(){
-      console.log('index view clicked.');
+      document.title = 'Scroll:' + Date.now();
+      console && console.log(Date.now());
     }
   });
 
