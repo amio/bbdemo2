@@ -15,6 +15,13 @@ define(['$', '_', 'B', 'BPV', 'text!templates/index.html'], function ($, _, B, B
       // render to page wrapper
       this.renderPage();
       return this;
+    },
+
+    events: {
+      'click': 'viewclick'
+    },
+    viewclick: function(){
+      console.log('index view clicked.');
     }
   });
 

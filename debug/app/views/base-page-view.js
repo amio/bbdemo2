@@ -9,14 +9,19 @@ define(['$', '_', 'B'], function ($, _, B){
 
       var router = window.appRouter,
           isBack = opt && opt.isBack,
-          fromView = isBack ? opt.from : router.getCurrentPageView(),
           toView = this,
-          animName = isBack ? 'slideright' : 'slideleft';
+          fromView = isBack ? opt.from : router.getCurrentPageView();
 
       toView.$el.addClass('page').appendTo('#wrapper');
       toView.$el.position();
 
+      // Rebind events when do back
+      if(isBack){
+        toView.delegateEvents();
+      }
+
       if (this.supportAnimation() && fromView) {
+        var animName = isBack ? 'slideright' : 'slideleft';
         toView.doSlide(fromView, toView, animName, function (fromView, toView){
           fromView.remove();
         });
@@ -27,6 +32,7 @@ define(['$', '_', 'B'], function ($, _, B){
     },
 
     supportAnimation: function (){
+      // TODO: check if allow animation
       return true;
     },
 
@@ -41,7 +47,7 @@ define(['$', '_', 'B'], function ($, _, B){
       var fromEl = fromPageView.$el,
           toEl = toPageView.$el;
 
-      fromEl.on('webkitAnimationEnd', function (){
+      fromEl.one('webkitAnimationEnd', function (){
         fromEl.removeClass(animationName + ' out');
         toEl.removeClass(animationName + ' in');
         callback(fromPageView, toPageView);
